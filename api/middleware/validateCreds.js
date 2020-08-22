@@ -1,7 +1,19 @@
-function validateNewUser(req, res, next) {
+const Users = require("../../users/users-model");
+
+async function validateNewUser(req, res, next) {
     let user = req.body;
 
     if (user.username) {
+        const allUsers = await Users.getUsers();
+        let userExists = false;
+        allUsers.map(userFromDb => {
+            if(userFromDb.username === user.username ) {
+                userExists = true;
+            }
+        })
+        if(userExists) {
+            res.status(400).json({ message: "That username already exists" })
+        }
         if (user.password) {
             if (user.firstName) {
                 if (user.lastName) {
