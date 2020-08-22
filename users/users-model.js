@@ -9,8 +9,9 @@ module.exports = {
 async function addUser(newUser) {
 
 
-    const [id] = await db("users").insert(newUser);
-    return findById(id);
+    // const [id] = await db("users").insert(newUser);
+    // return findById(id);
+    return db("users").insert(newUser);
 }
 
 function findById(id) {

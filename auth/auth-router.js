@@ -18,7 +18,7 @@ router.post("/signup", validateNewUser, (req, res) => {
             res.status(201).json({createdUser: newUser, token });
         })
         .catch(err => {
-            res.status(500).json({ message: "we were unable to add this user" })
+            res.status(500).json({ message: "we were unable to add this user",  err });
         })
 });
 
