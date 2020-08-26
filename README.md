@@ -82,7 +82,9 @@ Response:
 ```
 
 ### Get a single playlist
-#### GET */api/playlists/:id*           //id is the id of the playlist
+#### GET */api/playlists/:id*           
+
+//id is the id of the playlist
 
 Verifies that a user is logged in and then return JSON object with playlist info
 
@@ -124,7 +126,9 @@ Response:
 ```
 
 ### Update the name of a playlist
-#### PUT */api/playlists/:id*           //id is the id of the playlist
+#### PUT */api/playlists/:id*           
+
+//id is the id of the playlist
 
 Verifies that a user is logged in and then return JSON object with updated playlist info
 
@@ -139,7 +143,9 @@ Response:
 ```
 
 ### Update the name of a playlist
-#### DELETE */api/playlists/:id*            //id is the id of the playlist
+#### DELETE */api/playlists/:id*           
+
+//id is the id of the playlist
 
 Verifies that a user is logged in and then return successful delete message
 
