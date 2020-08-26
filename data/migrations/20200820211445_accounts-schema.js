@@ -13,11 +13,12 @@ exports.up = function (knex) {
             tbl.string("artist", 256).notNullable();
             tbl.string("song_name", 256).notNullable();
             tbl.string("album_cover", 256).notNullable();
+            tbl.string("track_id").notNullable();
         })
         .createTable("playlists", tbl => {
             tbl.increments();
             tbl.string("playlist_name").notNullable();
-            tbl.integer("user")
+            tbl.integer("user_id")
                 .unsigned()
                 .notNullable()
                 .references("users.id")
