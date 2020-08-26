@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post("/", validatePlaylistCreds, (req, res) => {
-    const playlist = req.body;
+    const playlist = {user_id: req.decodedJwt.subject, playlist_name: req.body.playlist_name}
     Playlists.add(playlist)
         .then(added => {
             res.status(201).json(added);
@@ -26,8 +26,8 @@ router.get("/:id", validatePlaylistId, (req, res) => {
         })
 });
 
-router.get("/user/:id", (req, res) => {
-    const { id } = req.params;
+router.get("/", (req, res) => {
+    const  id  = req.decodedJwt.subject;
 
     Playlists.find(id)
         .then(playlists => {

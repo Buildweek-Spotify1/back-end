@@ -9,7 +9,7 @@ module.exports = {
 }
 
 function find(user_id) {
-    return db("playlists").where({ user_id });
+    return db("playlists").select("playlists.id","playlists.playlist_name" ).where({ user_id });
 };
 
 function findById(id) {
@@ -28,8 +28,8 @@ async function add(newPlaylist) {
 };
 
 async function update(changes, id) {
-    const playlist_id = await db("playlists").where({ id }).update(changes, "id");
-    return findById(playlist_id);
+    await db("playlists").where({ id }).update(changes, "id");
+    return findById(id);
 }
 
 function remove(id) {

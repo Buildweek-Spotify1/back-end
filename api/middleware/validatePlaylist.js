@@ -16,19 +16,10 @@ async function validatePlaylistId(req, res, next) {
 };
 
 async function validatePlaylistCreds(req, res, next) {
-    const { user_id, playlist_name } = req.body;
+    const { playlist_name } = req.body;
 
     if(playlist_name) {
-        if (user_id) {
-            const user = await Users.findById(user_id);
-            if (user) {
-                next();
-            } else {
-                res.status(404).json({ message: "There is no user that matches that id" });
-            }
-        } else {
-            res.status(400).json({ message: "Please provide a user id" });
-        }
+        next();
     } else {
         res.status(400).json({ message: "Please provide a name for the playlist" });  
     }
