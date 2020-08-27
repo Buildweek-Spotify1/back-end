@@ -132,6 +132,13 @@ Response:
 
 Verifies that a user is logged in and then return JSON object with updated playlist info
 
+Request: 
+```
+{
+    playlist_name: "some playlist new name"
+}
+```
+
 
 Response: 
 ```
