@@ -7,7 +7,8 @@ module.exports = {
     update,
     remove,
     addSongToPlaylist,
-    playlistSongs
+    playlistSongs,
+    removeSongPlaylist
 }
 
 function find(user_id) {
@@ -65,4 +66,21 @@ function playlistSongs(id) {
         .join("songs as s", "s.id", "ps.song_id")
         .select("s.artist", "s.title", "s.album", "s.albumCover", "s.id")
         .where({ playlist_id: id });
+}
+
+async function removeSongPlaylist(playlist_id, song_id) {
+    const currentPLSongs = await playlistSongs(playlist_id);
+    let exists = false;
+    currentPLSongs.map(song => {
+        if (song.id === song_id) {
+            exists = true;
+        }
+    })
+    if (exists) {
+        await db("playlist_songs").where({ playlist_id, song_id }).del();;
+
+        return playlistSongs(playlist_id);
+    } else {
+        return playlistSongs(playlist_id);
+    }
 }

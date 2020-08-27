@@ -82,11 +82,18 @@ router.post("/:id/songs", validatePlaylistId, validateSongCreds, async (req, res
 });
 
 router.get("/:id/songs", async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const playlist = await Playlists.findById(id);
     const songs = await Playlists.playlistSongs(id);
     res.status(200).json({ id, playlist_name: playlist.playlist_name, songs });
 
+});
+
+router.delete("/:id/songs/:songId", async (req, res) => {
+    const { id, songId } = req.params;
+    const songs = await Playlists.removeSongPlaylist(id, songId);
+    const playlist = await Playlists.findById(id);
+    res.status(200).json({ id, playlist_name: playlist.playlist_name, songs });
 })
 
 module.exports = router;
