@@ -77,7 +77,15 @@ router.post("/:id/songs", validatePlaylistId, validateSongCreds, async (req, res
 
     const updated = await Playlists.addSongToPlaylist(songId, playlistId);
 
-    res.status(200).json({id: playlistId, playlist_name: playlist.playlist_name, songs: updated});
+    res.status(200).json({ id: playlistId, playlist_name: playlist.playlist_name, songs: updated });
+
+});
+
+router.get("/:id/songs", async (req, res) => {
+    const {id} = req.params;
+    const playlist = await Playlists.findById(id);
+    const songs = await Playlists.playlistSongs(id);
+    res.status(200).json({ id, playlist_name: playlist.playlist_name, songs });
 
 })
 

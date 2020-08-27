@@ -6,7 +6,8 @@ module.exports = {
     add,
     update,
     remove,
-    addSongToPlaylist
+    addSongToPlaylist,
+    playlistSongs
 }
 
 function find(user_id) {
