@@ -1,5 +1,5 @@
 const Playlists = require("../../playlists/playlists-model");
-const Users = require("../../users/users-model");
+
 
 
 async function validatePlaylistId(req, res, next) {

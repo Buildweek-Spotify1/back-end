@@ -9,11 +9,11 @@ exports.up = function (knex) {
             tbl.string("lastName", 256).notNullable();
         })
         .createTable("songs", tbl => {
-            tbl.increments();
             tbl.string("artist", 256).notNullable();
-            tbl.string("song_name", 256).notNullable();
-            tbl.string("album_cover", 256).notNullable();
-            tbl.string("track_id").notNullable();
+            tbl.string("title", 256).notNullable();
+            tbl.string("albumCover", 256).notNullable();
+            tbl.string("id").notNullable().primary();
+            tbl.string("album", 256).notNullable();
         })
         .createTable("playlists", tbl => {
             tbl.increments();

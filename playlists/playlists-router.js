@@ -1,11 +1,13 @@
 const Playlists = require("./playlists-model");
-const {validatePlaylistId, validatePlaylistCreds } = require("../api/middleware/validatePlaylist");
+const Songs = require("../songs/songs-model");
+const { validatePlaylistId, validatePlaylistCreds } = require("../api/middleware/validatePlaylist");
+const { validateSongCreds } = require("../api/middleware/validateSong")
 
 const express = require('express');
 const router = express.Router();
 
 router.post("/", validatePlaylistCreds, (req, res) => {
-    const playlist = {user_id: req.decodedJwt.subject, playlist_name: req.body.playlist_name}
+    const playlist = { user_id: req.decodedJwt.subject, playlist_name: req.body.playlist_name }
     Playlists.add(playlist)
         .then(added => {
             res.status(201).json(added);
@@ -27,7 +29,7 @@ router.get("/:id", validatePlaylistId, (req, res) => {
 });
 
 router.get("/", (req, res) => {
-    const  id  = req.decodedJwt.subject;
+    const id = req.decodedJwt.subject;
 
     Playlists.find(id)
         .then(playlists => {
@@ -62,6 +64,20 @@ router.delete("/:id", validatePlaylistId, (req, res) => {
         .catch(err => {
             res.status(500).json({ message: "Failed to delete that playlist" });
         })
+})
+
+router.post("/:id/songs", validatePlaylistId, validateSongCreds, async (req, res) => {
+    const song = req.body;
+    const playlistId = req.params.id;
+
+    const newSong = await Songs.add(song);
+    const songId = newSong.id;
+    console.log("song and play", songId, playlistId)
+
+    const updated = await Playlists.addSongToPlaylist(songId, playlistId);
+
+    res.status(200).json(updated);
+
 })
 
 module.exports = router;
