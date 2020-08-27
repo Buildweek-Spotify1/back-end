@@ -62,6 +62,6 @@ function playlistSongs(id) {
     return db("playlist_songs as ps")
         .join("playlists as p", "p.id", "ps.playlist_id")
         .join("songs as s", "s.id", "ps.song_id")
-        .select("p.playlist_name", "s.artist", "s.title", "s.album", "s.albumCover", "s.id")
+        .select("s.artist", "s.title", "s.album", "s.albumCover", "s.id")
         .where({ playlist_id: id });
 }

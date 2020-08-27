@@ -69,6 +69,7 @@ router.delete("/:id", validatePlaylistId, (req, res) => {
 router.post("/:id/songs", validatePlaylistId, validateSongCreds, async (req, res) => {
     const song = req.body;
     const playlistId = req.params.id;
+    const playlist = await Playlists.findById(playlistId);
 
     const newSong = await Songs.add(song);
     const songId = newSong.id;
@@ -76,7 +77,7 @@ router.post("/:id/songs", validatePlaylistId, validateSongCreds, async (req, res
 
     const updated = await Playlists.addSongToPlaylist(songId, playlistId);
 
-    res.status(200).json(updated);
+    res.status(200).json({id: playlistId, playlist_name: playlist.playlist_name, songs: updated});
 
 })
 
