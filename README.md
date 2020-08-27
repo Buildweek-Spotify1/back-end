@@ -196,7 +196,7 @@ Response:
                 "album": "RED",
                 "albumCover": "<img address>",
                 "id": "HHYGDTSRE"
-            }
+            },
             {
                 "artist": "singer",
                 "title": "song",
@@ -229,7 +229,7 @@ Response:
                 "album": "RED",
                 "albumCover": "<img address>",
                 "id": "HHYGDTSRE"
-            }
+            },
             {
                 "artist": "singer",
                 "title": "song",
@@ -237,6 +237,32 @@ Response:
                 "albumCover": "<img address>",
                 "id": "FFFFDDESD"
             }
+        ]
+}
+```
+
+### Delete a song from a playlist
+#### DELETE */api/playlists/:id/songs/:songId*           
+
+//id is the id of the playlist
+
+Verifies that a user is logged in and then return JSON object with the playlist less the song requested to be deleted
+
+
+Response: 
+```
+{
+    "id": "1",
+    "playlist_name": "some playlist  name",
+    "songs": 
+        [
+            {
+                "artist": "taylor swift",
+                "title": "love song",
+                "album": "RED",
+                "albumCover": "<img address>",
+                "id": "HHYGDTSRE"
+            },
         ]
 }
 ```
