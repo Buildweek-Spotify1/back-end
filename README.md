@@ -185,23 +185,60 @@ Request:
 
 Response: 
 ```
-[
-    {
-        "playlist_name": "some playlist  name",
-        "artist": "taylor swift",
-        "title": "love song",
-        "album": "RED",
-        "albumCover": "<img address>",
-        "id": "HHYGDTSRE"
-    }
-    {
-        "playlist_name": "some playlist  name",
-        "artist": "singer",
-        "title": "song",
-        "album": "nice album",
-        "albumCover": "<img address>",
-        "id": "FFFFDDESD"
-    }
-]
+{
+    "id": "1",
+    "playlist_name": "some playlist  name",
+    "songs": 
+        [
+            {
+                "artist": "taylor swift",
+                "title": "love song",
+                "album": "RED",
+                "albumCover": "<img address>",
+                "id": "HHYGDTSRE"
+            }
+            {
+                "artist": "singer",
+                "title": "song",
+                "album": "nice album",
+                "albumCover": "<img address>",
+                "id": "FFFFDDESD"
+            }
+        ]
+}
 ```
+
+### Get all songs on a playlist
+#### GET */api/playlists/:id/songs*           
+
+//id is the id of the playlist
+
+Verifies that a user is logged in and then return JSON object with the playlist song list
+
+
+Response: 
+```
+{
+    "id": "1",
+    "playlist_name": "some playlist  name",
+    "songs": 
+        [
+            {
+                "artist": "taylor swift",
+                "title": "love song",
+                "album": "RED",
+                "albumCover": "<img address>",
+                "id": "HHYGDTSRE"
+            }
+            {
+                "artist": "singer",
+                "title": "song",
+                "album": "nice album",
+                "albumCover": "<img address>",
+                "id": "FFFFDDESD"
+            }
+        ]
+}
+```
+
 
