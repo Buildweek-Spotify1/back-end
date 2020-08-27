@@ -164,3 +164,44 @@ Response:
 }
 ```
 
+### Add a song to a playlist
+#### POST */api/playlists/:id/songs*           
+
+//id is the id of the playlist
+
+Verifies that a user is logged in and then return JSON object with updated playlist song list
+
+Request: 
+```
+{
+    "artist": "singer",
+    "title": "song",
+    "album": "nice album",
+    "albumCover": "<img address>",
+    "id": "FFFFDDESD"
+}
+```
+
+
+Response: 
+```
+[
+    {
+        "playlist_name": "some playlist  name",
+        "artist": "taylor swift",
+        "title": "love song",
+        "album": "RED",
+        "albumCover": "<img address>",
+        "id": "HHYGDTSRE"
+    }
+    {
+        "playlist_name": "some playlist  name",
+        "artist": "singer",
+        "title": "song",
+        "album": "nice album",
+        "albumCover": "<img address>",
+        "id": "FFFFDDESD"
+    }
+]
+```
+
