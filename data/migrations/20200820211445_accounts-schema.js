@@ -26,7 +26,7 @@ exports.up = function (knex) {
                 .onUpdate("CASCADE");
         })
         .createTable("playlist_songs", tbl => {
-            tbl.integer("song_id").unsigned().notNullable().references("songs.id").onDelete("CASCADE").onUpdate("CASCADE");
+            tbl.string("song_id").unsigned().notNullable().references("songs.id").onDelete("CASCADE").onUpdate("CASCADE");
             tbl.integer("playlist_id").unsigned().notNullable().references("playlists.id").onDelete("CASCADE").onUpdate("CASCADE");
             tbl.primary(["song_id", "playlist_id"]);
         })
