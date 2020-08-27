@@ -2,14 +2,34 @@ const db = require("../data/db-config");
 
 module.exports = {
     add,
-    findById
+    findById,
+    getAllSongs
+}
+
+function getAllSongs() {
+    return db("songs");
 }
 
 async function add(newSong) {
 
+    const dbSongs = await getAllSongs();
+    let notInDB = true;
+    dbSongs.map(song => {
 
-    await db("songs").insert(newSong, "id");
-    return findById(newSong.id);
+        if (song.id === newSong.id) {
+            notInDB = false;
+        }
+    })
+
+    if (notInDB) {
+        await db("songs").insert(newSong, "id");
+        return findById(newSong.id);
+    } else {
+        return findById(newSong.id);
+    }
+
+
+
 
 };
 

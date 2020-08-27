@@ -38,9 +38,23 @@ function remove(id) {
 }
 
 async function addSongToPlaylist(song_id, playlist_id) {
-    await db("playlist_songs").insert({ song_id, playlist_id }, "playlist_id");
-    
-    return playlistSongs(playlist_id);
+
+    const currentPLSongs = await playlistSongs(playlist_id);
+    let notInPlaylist = true;
+    currentPLSongs.map(song => {
+        if (song.id === song_id) {
+            notInPlaylist = false;
+        }
+    })
+
+    if (notInPlaylist) {
+        await db("playlist_songs").insert({ song_id, playlist_id }, "playlist_id");
+
+        return playlistSongs(playlist_id);
+    } else {
+        return playlistSongs(playlist_id);
+    }
+
 
 }
 
@@ -48,6 +62,6 @@ function playlistSongs(id) {
     return db("playlist_songs as ps")
         .join("playlists as p", "p.id", "ps.playlist_id")
         .join("songs as s", "s.id", "ps.song_id")
-        .select("p.id", "p.playlist_name", "s.artist","s.title", "s.album", "s.albumCover", "s.id")
-        .where({playlist_id: id});
+        .select("p.playlist_name", "s.artist", "s.title", "s.album", "s.albumCover", "s.id")
+        .where({ playlist_id: id });
 }
